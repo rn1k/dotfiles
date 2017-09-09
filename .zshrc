@@ -4,7 +4,7 @@ source ~/.zplug/init.zsh
 
 autoload -U compinit && compinit
 
-PATH="$PATH:/home/rmaki/.dotfiles/bin"
+PATH="$PATH:`pwd`/.dotfiles/bin"
 
 #-----------------------------------------
 
@@ -45,7 +45,7 @@ zplug "junegunn/fzf-bin", \
     rename-to:"fzf", \
     frozen:1
 
-zplug "junegunn/fzf", as:command, of:bin/fzf-tmux
+zplug "junegunn/fzf", as:command, use:bin/fzf-tmux
 
 zplug "monochromegane/the_platinum_searcher", \
     as:command, \
