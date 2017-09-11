@@ -4,6 +4,8 @@ source ~/.zplug/init.zsh
 
 autoload -U compinit && compinit
 
+PATH="$PATH:/home/rmaki/.dotfiles/bin"
+
 #-----------------------------------------
 
 # history-select
