@@ -4,6 +4,7 @@ source ~/.zplug/init.zsh
 
 autoload -U compinit && compinit
 
+#-----------------------------------------
 
 # history-select
 peco-select-history() {
@@ -14,14 +15,17 @@ peco-select-history() {
 zle -N peco-select-history
 bindkey '^r' peco-select-history
 
+ENHANCD_FILTER=fzy:fzf:peco
+export ENHANCD_FILTER
 
+#-----------------------------------------
 
 zplug "plugins/git",   from:oh-my-zsh
 
 zplug "modules/prompt", from:prezto
 zstyle ':prezto:module:prompt' theme 'paradox'
 
-zplug "b4b4r07/enhancd"
+zplug "b4b4r07/enhancd", use:init.sh
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-syntax-highlighting"
 
