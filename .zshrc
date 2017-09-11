@@ -1,6 +1,18 @@
 # vim:ft=zplug
 
-source ~/.zplug/init.zsh
+if [[ -f ~/.zplug/init.zsh ]]; then
+    source ~/.zplug/init.zsh
+
+    if ! zplug check --verbose; then
+        printf "Install? [y/N]: "
+        if read -q; then
+            echo; zplug install
+        fi
+        echo
+    fi
+    zplug load
+fi
+
 autoload -U compinit && compinit
 
 ZPLUG_SUDO_PASSWORD=

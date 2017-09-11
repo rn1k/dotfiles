@@ -51,18 +51,4 @@ do
 ln -sfvn $DOTPATH/$dotfile $dotfile
 done
 
-if [[ -f ~/.zplug/init.zsh ]]; then
-    source ~/.zplug/init.zsh
-
-    if ! zplug check --verbose; then
-        printf "Install? [y/N]: "
-        if read -q; then
-            echo; zplug install
-        fi
-        echo
-    fi
-    zplug load
-fi
-
-
 exec $SHELL -l
