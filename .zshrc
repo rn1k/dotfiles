@@ -45,6 +45,8 @@ zplug "junegunn/fzf-bin", \
     rename-to:"fzf", \
     frozen:1
 
+zplug "junegunn/fzf", as:command, of:bin/fzf-tmux
+
 zplug "monochromegane/the_platinum_searcher", \
     as:command, \
     from:gh-r, \
