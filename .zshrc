@@ -4,15 +4,25 @@ source ~/.zplug/init.zsh
 
 autoload -U compinit && compinit
 
+
+# history-select
+peco-select-history() {
+        BUFFER=$(history 1 | sort -k1,1nr | perl -ne 'BEGIN { my @lines = (); } s/^\s*\d+\*?\s*//; $in=$_; if (!(grep {$in eq $_} @lines)) { push(@lines, $in); print $in; }' | peco --query "$LBUFFER")
+            CURSOR=${#BUFFER}
+                zle reset-prompt
+}
+zle -N peco-select-history
+bindkey '^r' peco-select-history
+
+
+
 zplug "plugins/git",   from:oh-my-zsh
 
 zplug "modules/prompt", from:prezto
 
-zplug "b4b4r07/enhancd", use:init.sh
-zplug "b4b4r07/zsh-vimode-visual", use:"*.zsh", defer:3
+zplug "b4b4r07/enhancd"
 zplug "zsh-users/zsh-completions"
-#zplug "zsh-users/zsh-history-substring-search", defer:3
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
+zplug "zsh-users/zsh-syntax-highlighting"
 
 zplug "glidenote/hub-zsh-completion"
 zplug 'Valodim/zsh-curl-completion'
@@ -71,5 +81,13 @@ zplug 'b4b4r07/git-fzf', \
     as:command, \
     use:'bin/(git-*).zsh', \
     rename-to:'$1'
+
+
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
 
 zplug load --verbose
