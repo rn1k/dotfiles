@@ -1,17 +1,6 @@
 # vim:ft=zplug
 
-if [[ -f ~/.zplug/init.zsh ]]; then
-    source ~/.zplug/init.zsh
-
-    if ! zplug check --verbose; then
-        printf "Install? [y/N]: "
-        if read -q; then
-            echo; zplug install
-        fi
-        echo
-    fi
-    zplug load
-fi
+source ~/.zplug/init.zsh
 
 autoload -U compinit && compinit
 
@@ -86,3 +75,4 @@ zplug 'b4b4r07/git-fzf', \
     use:'bin/(git-*).zsh', \
     rename-to:'$1'
 
+zplug load --verbose
