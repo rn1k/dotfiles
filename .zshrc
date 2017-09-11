@@ -4,12 +4,7 @@ source ~/.zplug/init.zsh
 
 autoload -U compinit && compinit
 
-ZPLUG_SUDO_PASSWORD=
-ZPLUG_PROTOCOL=ssh
-
 zplug "zplug/zplug", hook-build:'zplug --self-manage'
-
-zplug "~/.zsh", from:local, use:"<->_*.zsh"
 
 zplug "b4b4r07/enhancd", use:init.sh
 zplug "b4b4r07/zsh-vimode-visual", use:"*.zsh", defer:3
