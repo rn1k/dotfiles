@@ -1,5 +1,8 @@
 # vim:ft=zplug
 
+source ~/.zplug/init.zsh
+autoload -U compinit && compinit
+
 ZPLUG_SUDO_PASSWORD=
 ZPLUG_PROTOCOL=ssh
 
