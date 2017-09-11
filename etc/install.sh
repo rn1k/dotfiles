@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+
+
 if [ -e ~/.zprofile ] ; then
     rm  ~/.zprofile*
 fi
@@ -50,7 +52,21 @@ PATH="$PATH:~/bin"
 
 for dotfile in `ls -Fa | grep -v / |  grep "^\."`
 do
-ln -sfvn $dotfile $DOTPATH/bin/$dotfile
+ln -sfvn $DOTPATH/bin/$dotfile $dotfile
 done
+
+if [[ -f ~/.zplug/init.zsh ]]; then
+    source ~/.zplug/init.zsh
+
+    if ! zplug check --verbose; then
+        printf "Install? [y/N]: "
+        if read -q; then
+            echo; zplug install
+        fi
+        echo
+    fi
+    zplug load
+fi
+
 
 exec $SHELL -l
