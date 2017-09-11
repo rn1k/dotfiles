@@ -4,7 +4,9 @@ source ~/.zplug/init.zsh
 
 autoload -U compinit && compinit
 
-zplug "zplug/zplug", hook-build:'zplug --self-manage'
+zplug "plugins/git",   from:oh-my-zsh
+
+zplug "modules/prompt", from:prezto
 
 zplug "b4b4r07/enhancd", use:init.sh
 zplug "b4b4r07/zsh-vimode-visual", use:"*.zsh", defer:3
