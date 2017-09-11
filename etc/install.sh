@@ -14,11 +14,7 @@ if [ -e ~/.zplug ] ; then
     rm -rf ~/.zplug*
 fi
 
-git clone https://github.com/zplug/zplug.git ~/.zplug
-
-if [ -e ~/.zplug ]; then
-    curl -sL zplug.sh/installer | zsh
-fi
+curl -sL https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 
 if [ -e ~/.vimrc ] ; then
     rm  ~/.vimrc*
@@ -52,7 +48,7 @@ PATH="$PATH:~/bin"
 
 for dotfile in `ls -Fa | grep -v / |  grep "^\."`
 do
-ln -sfvn $DOTPATH/bin/$dotfile $dotfile
+ln -sfvn $DOTPATH/$dotfile $dotfile
 done
 
 if [[ -f ~/.zplug/init.zsh ]]; then
