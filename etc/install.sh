@@ -46,7 +46,7 @@ git clone --recursive "$DOTFILES_GITHUB" "$DOTPATH"
 
 PATH="$PATH:~/bin"
 
-for dotfile in `ls -Fa | grep -v / |  grep "^\."`
+for dotfile in `ls -Fa $DOTPATH | grep -v / |  grep "^\."`
 do
 ln -sfvn $DOTPATH/$dotfile $dotfile
 done
