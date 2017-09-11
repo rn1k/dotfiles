@@ -19,6 +19,7 @@ bindkey '^r' peco-select-history
 zplug "plugins/git",   from:oh-my-zsh
 
 zplug "modules/prompt", from:prezto
+zstyle ':prezto:module:prompt' theme 'powerline'
 
 zplug "b4b4r07/enhancd"
 zplug "zsh-users/zsh-completions"
