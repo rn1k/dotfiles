@@ -1,7 +1,5 @@
 #!/bin/zsh
 
-
-
 if [ -e ~/.zprofile ] ; then
     rm  ~/.zprofile*
 fi
@@ -44,11 +42,14 @@ DOTFILES_GITHUB="https://github.com/rn1k/dotfiles.git"
 DOTPATH=`pwd`/.dotfiles
 git clone --recursive "$DOTFILES_GITHUB" "$DOTPATH"
 
-PATH="$PATH:~/bin"
-
 for dotfile in `ls -Fa $DOTPATH | grep -v / |  grep "^\."`
 do
-ln -sfvn $DOTPATH/$dotfile $dotfile
+  ln -sfvn $DOTPATH/$dotfile $dotfile
 done
+
+if [ `uname`=="Linux" ]; then                                      
+  v=`cat /etc/redhat-release | sed -e 's/.*\s\([0-9]\)\..*/\1/'`;
+  ln -s `pwd`/.dotfiles/bin/tmux_centos${v} .dotfiles/bin/tmux;
+fi
 
 exec $SHELL -l
