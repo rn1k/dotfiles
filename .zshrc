@@ -11,11 +11,84 @@ PATH="$PATH:`pwd`/.dotfiles/bin"
 # history-select
 peco-select-history() {
         BUFFER=$(history 1 | sort -k1,1nr | perl -ne 'BEGIN { my @lines = (); } s/^\s*\d+\*?\s*//; $in=$_; if (!(grep {$in eq $_} @lines)) { push(@lines, $in); print $in; }' | peco --query "$LBUFFER")
-            CURSOR=${#BUFFER}
-                zle reset-prompt
+        CURSOR=${#BUFFER}
+        zle reset-prompt
 }
 zle -N peco-select-history
 bindkey '^r' peco-select-history
+
+#-----------------------------------------
+
+function vimpt(){
+    vim `pt $1 | peco | cut -d : -f 1`
+}
+
+alias vp="vimpt"
+
+function vim-open(){
+    res=$(ls | peco)
+    if [ -n "$res" ]; then
+      BUFFER+="vim $res"
+      zle accept-line
+    fi
+}
+
+zle -N vim-open
+bindkey '^v' vim-open
+
+#-----------------------------------------
+
+alias pssh="peco-ssh"
+
+function peco-ssh() {
+    # select ssh host from ~/.ssh/known_hosts
+    local res host
+    if [ "${1}" = "" ]; then
+        res=$(awk '{print $1}' ~/.ssh/known_hosts | awk -F "," '{print $1}' | grep 'co\.jp' | peco)
+    else
+        res=$(awk '{print $1}' ~/.ssh/known_hosts | awk -F "," '{print $1}' | grep ${1} | peco)
+    fi
+    if [ -n "$res" ]; then
+      BUFFER+="ssh -A $res"
+      zle accept-line
+    fi
+}
+zle -N peco-ssh
+bindkey '^s' peco-ssh
+
+#-----------------------------------------
+
+source ~/.zsh.d/z.sh
+
+function peco-z-search
+{
+  which peco z > /dev/null
+  if [ $? -ne 0 ]; then
+    echo "Please install peco and z"
+    return 1
+  fi
+  local res=$(z | sort -rn | cut -c 12- | peco)
+  if [ -n "$res" ]; then
+    BUFFER+="cd $res"
+    zle accept-line
+  else
+    return 1
+  fi
+}
+zle -N peco-z-search
+bindkey '^f' peco-z-search
+
+#-----------------------------------------
+
+function peco-lscd() {
+    local dir="$( find . -maxdepth 1 -type d | sed -e 's;\./;;' | peco )"
+    if [ ! -z "$dir" ] ; then
+        BUFFER+="cd $dir"
+        zle accept-line
+    fi
+}
+zle -N peco-lscd
+bindkey '^w' peco-lscd
 
 ENHANCD_FILTER=fzy:fzf:peco
 export ENHANCD_FILTER
@@ -91,7 +164,6 @@ zplug 'b4b4r07/git-fzf', \
     use:'bin/(git-*).zsh', \
     rename-to:'$1'
 
-
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
     if read -q; then
@@ -100,3 +172,4 @@ if ! zplug check --verbose; then
 fi
 
 zplug load --verbose
+
