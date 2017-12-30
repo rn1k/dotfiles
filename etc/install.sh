@@ -42,9 +42,9 @@ DOTFILES_GITHUB="https://github.com/rn1k/dotfiles.git"
 DOTPATH=`pwd`/.dotfiles
 git clone --recursive "$DOTFILES_GITHUB" "$DOTPATH"
 
-for dotfile in `ls -Fa $DOTPATH | grep -v / |  grep "^\."`
+for dotfile in `ls -Fa $DOTPATH | grep -v / |  grep -v .md`
 do
-  ln -sfvn $DOTPATH/$dotfile $dotfile
+  ln -sfvn $DOTPATH/$dotfile .$dotfile
 done
 
 if [ `uname`=="Linux" ]; then                                      
