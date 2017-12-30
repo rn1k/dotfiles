@@ -6,6 +6,9 @@ autoload -U compinit && compinit
 
 PATH="$PATH:`pwd`/.dotfiles/bin"
 
+alias vim="nvim"
+export XDG_CONFIG_HOME=$HOME/.config
+
 #-----------------------------------------
 
 # history-select
@@ -57,8 +60,6 @@ zle -N peco-ssh
 bindkey '^s' peco-ssh
 
 #-----------------------------------------
-
-source ~/.zsh.d/z.sh
 
 function peco-z-search
 {
@@ -131,6 +132,13 @@ zplug "peco/peco", \
     from:gh-r, \
     frozen:1
 
+zplug "rupa/z", use:"z.sh"
+
+zplug 'BurntSushi/ripgrep', \
+    from:gh-r, \
+    as:command, \
+    rename-to:"rg"
+
 zplug "motemen/ghq", \
     as:command, \
     from:gh-r, \
@@ -172,4 +180,3 @@ if ! zplug check --verbose; then
 fi
 
 zplug load --verbose
-
