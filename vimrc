@@ -41,12 +41,18 @@ endif
 "#
 
 "## 見た目
+syntax enable
 set number
 set cursorline
 set virtualedit=onemore
 set showmatch
 set laststatus=2
 set wildmode=list:longest
+set tabstop=4
+set shiftwidth=4
+set smarttab
+set smartindent
+set pastetoggle=<Leader>p
 
 nnoremap j gj
 nnoremap k gk
@@ -55,6 +61,8 @@ nnoremap <C-j> <esc>
 noremap! <C-j> <esc>
 tnoremap <silent> <esc> <C-\><C-n>
 tnoremap <silent> <C-j> <C-\><C-n>
+" Esc2回で検索のハイライトを消す
+nnoremap <silent> <Esc><Esc> :<C-u>nohlsearch<CR>
 
 " split系 mapping {{{
 nnoremap s <Nop>
@@ -86,5 +94,6 @@ nnoremap sQ :<C-u>bd<CR>
 set ignorecase
 set smartcase
 set wrapscan
+set hlsearch
 
 " vim:set foldmethod=marker:
