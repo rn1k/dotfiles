@@ -133,3 +133,6 @@ repo = 'stanangeloff/php.vim'
 
 [[plugins]]
 repo = 'tpope/vim-surround'
+
+[[plugins]]
+repo = 'cohama/lexima.vim'

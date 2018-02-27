@@ -39,6 +39,7 @@ endif
 "#
 "# 一般的な設定
 "#
+set mouse=a
 
 "## 見た目
 syntax enable
