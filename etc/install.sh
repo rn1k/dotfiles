@@ -62,7 +62,7 @@ if [ `uname` = "Linux" ]; then
     sudo yum -y install epel-release
     sudo curl -o /etc/yum.repos.d/dperson-neovim-epel-7.repo https://copr.fedorainfracloud.org/coprs/dperson/neovim/repo/epel-7/dperson-neovim-epel-7.repo
     sudo yum -y install neovim
-elif [ `uname` = "Darwin"]; then
+elif [ `uname` = "Darwin" ]; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     brew install tmux
     brew install zplug
