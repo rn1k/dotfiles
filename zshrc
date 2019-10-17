@@ -1,6 +1,12 @@
 # vim:ft=zplug
 
-source ~/.zplug/init.zsh
+if [ `uname` = "Linux" ]; then
+    export ZPLUG_HOME=~/.zplug/init.zsh
+elif [ `uname` = "Darwin" ]; then
+    export ZPLUG_HOME=/usr/local/opt/zplug
+fi
+
+source ${ZPLUG_HOME}/init.zsh
 
 autoload -U compinit && compinit
 
