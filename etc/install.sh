@@ -51,7 +51,7 @@ do
     ln -sfvn $DOTPATH/$dotfile .$dotfile
 done
 
-if [ `uname`=="Linux" ]; then
+if [ `uname` = "Linux" ]; then
     v=`cat /etc/redhat-release | sed -e 's/.*\s\([0-9]\)\..*/\1/'`;
     ln -s `pwd`/.dotfiles/bin/tmux_centos${v} .dotfiles/bin/tmux;
     # zplug
@@ -62,11 +62,15 @@ if [ `uname`=="Linux" ]; then
     sudo yum -y install epel-release
     sudo curl -o /etc/yum.repos.d/dperson-neovim-epel-7.repo https://copr.fedorainfracloud.org/coprs/dperson/neovim/repo/epel-7/dperson-neovim-epel-7.repo
     sudo yum -y install neovim
-elif [ `uname`=="Darwin"]; then
+elif [ `uname` = "Darwin"]; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     brew install tmux
     brew install zplug
     brew install neovim
+    brew tap sanemat/font
+    brew install ricty --with-powerline
+    cp -f /usr/local/opt/ricty/share/fonts/Ricty*.ttf ~/Library/Fonts/
+    fc-cache -vf
 fi
 
 XDG_CONFIG_HOME=$HOME/.config
