@@ -12,9 +12,6 @@ if [ -e ~/.zplug ] ; then
     rm -rf ~/.zplug*
 fi
 
-echo "install zplug..."
-curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
-
 if [ -e ~/.vim ] ; then
     rm -rf ~/.vim/*
 else
@@ -51,17 +48,25 @@ git clone --recursive "$DOTFILES_GITHUB" "$DOTPATH"
 
 for dotfile in `ls -Fa $DOTPATH | grep -v / |  grep -v .md`
 do
-  ln -sfvn $DOTPATH/$dotfile .$dotfile
+    ln -sfvn $DOTPATH/$dotfile .$dotfile
 done
 
 if [ `uname`=="Linux" ]; then
-  v=`cat /etc/redhat-release | sed -e 's/.*\s\([0-9]\)\..*/\1/'`;
-  ln -s `pwd`/.dotfiles/bin/tmux_centos${v} .dotfiles/bin/tmux;
-  # neovim
-  echo "install neovim..."
-  sudo yum -y install epel-release
-  sudo curl -o /etc/yum.repos.d/dperson-neovim-epel-7.repo https://copr.fedorainfracloud.org/coprs/dperson/neovim/repo/epel-7/dperson-neovim-epel-7.repo
-  sudo yum -y install neovim
+    v=`cat /etc/redhat-release | sed -e 's/.*\s\([0-9]\)\..*/\1/'`;
+    ln -s `pwd`/.dotfiles/bin/tmux_centos${v} .dotfiles/bin/tmux;
+    # zplug
+    echo "install zplug..."
+    curl -sL https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+    # neovim
+    echo "install neovim..."
+    sudo yum -y install epel-release
+    sudo curl -o /etc/yum.repos.d/dperson-neovim-epel-7.repo https://copr.fedorainfracloud.org/coprs/dperson/neovim/repo/epel-7/dperson-neovim-epel-7.repo
+    sudo yum -y install neovim
+elif [ `uname`=="Darwin"]; then
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    brew install tmux
+    brew install zplug
+    brew install neovim
 fi
 
 XDG_CONFIG_HOME=$HOME/.config
