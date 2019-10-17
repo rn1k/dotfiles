@@ -68,6 +68,8 @@ elif [ `uname` = "Darwin" ]; then
         ln -sfvn $DOTPATH/$dotfile .$dotfile
     done
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    brew install zsh
+    brew install zsh-completion
     brew install tmux
     brew install zplug
     brew install neovim
