@@ -76,7 +76,7 @@ elif [ `uname` = "Darwin" ]; then
     brew install neovim
     brew tap sanemat/font
     brew install ricty --with-powerline
-    cp -f /usr/local/opt/ricty/share/fonts/Ricty*.ttf ~/Library/Fonts/
+    cp -f /opt/homebrew/share/fonts/Ricty*.ttf ~/Library/Fonts/
     fc-cache -vf
 fi
 
