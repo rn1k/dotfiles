@@ -68,6 +68,7 @@ elif [ `uname` = "Darwin" ]; then
         ln -sfvn $DOTPATH/$dotfile .$dotfile
     done
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    eval "$(/opt/homebrew/bin/brew shellenv)"
     brew install zsh
     brew install zsh-completion
     brew install yarn
