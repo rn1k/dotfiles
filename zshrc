@@ -12,6 +12,8 @@ autoload -U compinit && compinit
 
 PATH="$PATH:`pwd`/.dotfiles/bin"
 
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 alias vim="nvim"
 export XDG_CONFIG_HOME=$HOME/.config
 
