@@ -4,6 +4,7 @@ if [ `uname` = "Linux" ]; then
     export ZPLUG_HOME=~/.zplug/init.zsh
 elif [ `uname` = "Darwin" ]; then
     export ZPLUG_HOME=/usr/local/opt/zplug
+    eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 source ${ZPLUG_HOME}/init.zsh
@@ -12,7 +13,7 @@ autoload -U compinit && compinit
 
 PATH="$PATH:`pwd`/.dotfiles/bin"
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
+
 
 alias vim="nvim"
 export XDG_CONFIG_HOME=$HOME/.config
